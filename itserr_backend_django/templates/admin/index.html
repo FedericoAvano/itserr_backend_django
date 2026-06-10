@@ -1,0 +1,50 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+<div id="content-main">
+    <h1 style="text-align: center; margin-bottom: 40px; color: #555;">Dashboard</h1>
+    
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+        {% for app in app_list %}
+            {% for model in app.models %}
+                <div style="
+                    background: white;
+                    border-radius: 12px;
+                    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+                    padding: 25px;
+                    width: 300px;
+                    text-align: center;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 12px 24px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 16px rgba(0,0,0,0.1)';">
+                    <h2 style="font-size: 1.5em; margin-bottom: 10px; color: #800020;">{{ model.name }}</h2>
+                    <p style="color: #666; font-size: 0.9em; margin-bottom: 20px;">
+                        Gestisci gli oggetti di tipo {{ model.name }}.
+                    </p>
+                    <div style="display: flex; gap: 10px; justify-content: center;">
+                        <a href="{{ model.add_url }}" style="
+                            background: #800020;
+                            color: white;
+                            padding: 10px 20px;
+                            border-radius: 8px;
+                            text-decoration: none;
+                            font-weight: bold;
+                        ">Aggiungi</a>
+                        <a href="{{ model.admin_url }}" style="
+                            background: #eee;
+                            color: #222;
+                            padding: 10px 20px;
+                            border-radius: 8px;
+                            text-decoration: none;
+                            font-weight: bold;
+                        ">Visualizza</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
